@@ -15,7 +15,7 @@ namespace BROGUE_BLIKER
 	{
 		model.Draw();
 	}
-	void Block::Update()
+	void Block::Update(int crrentTime)
 	{
 		SetCollision(position.x - BLOCK_WIDTH / 2, position.y - BLOCK_HEIGHT / 2, BLOCK_WIDTH, BLOCK_HEIGHT);
 	}
@@ -31,11 +31,11 @@ namespace BROGUE_BLIKER
 		{
 			if (hitPoint[i].x == position.x - BLOCK_WIDTH / 2 || hitPoint[i].x == position.x + BLOCK_WIDTH / 2)
 			{
-				side.push_back(hitPoint[i]);
+				side.push_back(hitPoint[i]); // ブロック側面の座標のみ抽出
 			}
 			else if (hitPoint[i].y == position.y - BLOCK_HEIGHT / 2 || hitPoint[i].y == position.y + BLOCK_HEIGHT / 2)
 			{
-				upanddown.push_back(hitPoint[i]);
+				upanddown.push_back(hitPoint[i]); // ブロック上下面の座標のみ抽出
 			}
 		}
 		if (side.size() >= upanddown.size()) return true;

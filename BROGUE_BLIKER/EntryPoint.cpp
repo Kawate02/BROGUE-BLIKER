@@ -1,30 +1,23 @@
 #include "EntryPoint.h"
-using namespace BROGUE_BLIKER;
-
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+namespace BROGUE_BLIKER
 {
-	ChangeWindowMode(true);
-	SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 0);
-	SetWaitVSyncFlag(FALSE);
-	if (DxLib_Init() == -1)
-	{
-		return -1;
-	}
 	View view;
 	Input input;
 	GameManager game;
-	
-	bool end = false;
-	while (!end)
+
+	void Init(HWND hwnd)
 	{
-		if (ProcessMessage()) end = true;
-		input.Update();
-		if (Input::KeyDown(ESCAPE)) end = true;
-		game.Update();
-		view.Update();
-		WaitTimer(1);
+		game.Init();
+		view.Init(hwnd, WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
-	
-	DxLib_End();
-	return 0;
+	void Update(HWND hwnd)
+	{
+		input.Update(hwnd);
+		game.Update();
+ 		view.Update(hwnd);
+	}
+	void Exit(HWND hwnd)
+	{
+		view.Exit(hwnd);
+	}
 }

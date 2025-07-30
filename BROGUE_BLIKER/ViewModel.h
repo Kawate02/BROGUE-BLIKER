@@ -1,26 +1,42 @@
 #pragma once
 #include "Shape.h"
 #include "Color.h"
+#include "TextDictionary.h"
 
 #include <vector>
 #include <memory>
 
+///////////////////////////////////////////////////////////////////////////
+// Debugging utilities
+#include <iostream>
+#include <unordered_map>
+#include <string>
+inline void LogVectorSizeWithCount(const char* funcName, size_t size) {
+	static std::unordered_map<std::string, int> callCount;
+	int count = ++callCount[funcName];
+	std::cout << "[Call #" << count << "] " << funcName << " - list.size() = " << size << std::endl;
+}
+
+#define LOG_VECTOR_SIZE() LogVectorSizeWithCount(__FUNCTION__, ViewModelList::GetList().size())
+
+///////////////////////////////////////////////////////////////////////////
+
 namespace BROGUE_BLIKER
 {
+
 	struct ViewModel
 	{
 	public:
 		ViewModel();
-		ViewModel(int, int, Shape, int, Color);
+		ViewModel(int, int, Bitmap, int, Color);
 		int layer;
 		int id;
 		Point2D default_position;
 		Point2D position;
-		Shape shape;
+		Bitmap bitmap;
 		Color color;
 		int direction;
 	};
-
 
 	static class ViewModelList
 	{
@@ -31,6 +47,6 @@ namespace BROGUE_BLIKER
 		static void Update(ViewModel* vm);
 		static void Remove(ViewModel* vm);
 		static void Clear();
-		static std::vector<ViewModel*> GetList();
+		static const std::vector<ViewModel*>& GetList();
 	};
 }

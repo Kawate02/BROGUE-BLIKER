@@ -6,7 +6,16 @@
 
 namespace BROGUE_BLIKER
 {
-	GameManager::GameManager()
+	bool GameManager::GameEndFlag()
+	{
+		if (title.endFlag)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	void GameManager::Init()
 	{
 		ChangeState(TITLE);
 	}
@@ -14,8 +23,13 @@ namespace BROGUE_BLIKER
 	void GameManager::Update()
 	{
 		crrentState->Update();
-		if (Input::KeyDown(SPACE))
+		if (Input::KeyDown(SPACE) && crrentState == &title)
 		{
+			ChangeState(SELECT_STAGE);
+		}
+		if (select.stageGenerateFlag && crrentState == &select)
+		{
+			selectedStage = select.GetStageId();
 			ChangeState(INGAME);
 		}
 	}
@@ -30,7 +44,9 @@ namespace BROGUE_BLIKER
 			crrentState->Init();
 			break;
 		case SELECT_STAGE:
-
+			crrentState = &select;
+			crrentState->Init();
+			break;
 		case INGAME:
 			crrentState = &ingame;
 			ingame.SetStage(selectedStage);

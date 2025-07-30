@@ -3,22 +3,21 @@
 namespace BROGUE_BLIKER
 {
 	int Input::mouse_pos[2];
-	int Input::key[256];
-	int Input::mouse;
-
-	int oldmouse = 0;
+	BYTE Input::key[256];
 	Input::Input() {}
 
-	void Input::Update()
+	void Input::Update(HWND hwnd)
 	{
-		GetMousePoint(&mouse_pos[0], &mouse_pos[1]);
+		GetCursorPoint(hwnd);
 		InputKey();
 	}
 
 	void Input::InputKey()
 	{
-		static char buf[256];
-		GetHitKeyStateAll(buf);
+		static BYTE buf[256];
+
+		if (!GetKeyboardState(buf)) return;
+
 		for (int i = 0; i < 256; i++)
 		{
 			if (buf[i])
@@ -28,8 +27,19 @@ namespace BROGUE_BLIKER
 			}
 			else key[i] = 0;
 		}
+	}
 
-		mouse = GetMouseInput();
+	void Input::GetCursorPoint(HWND hwnd)
+	{
+		static POINT cursor_pos;
+		static tagRECT rect;
+		static LPRECT lpRect = &rect;
+
+		GetCursorPos(&cursor_pos);
+		GetWindowRect(hwnd, lpRect);
+
+		mouse_pos[0] = cursor_pos.x - lpRect->left;
+		mouse_pos[1] = cursor_pos.y - lpRect->top;
 	}
 
 	bool Input::KeyPress(int keycode)
@@ -39,16 +49,6 @@ namespace BROGUE_BLIKER
 
 	bool Input::KeyDown(int keycode)
 	{
-		return key[keycode] & 1 ? true : false;
-	}
-	bool Input::MousePress(int keycode)
-	{
-		return mouse & keycode;
-	}
-	bool Input::MouseDown(int keycode)
-	{
-		bool result = mouse & keycode && !(oldmouse & mouse);
-		oldmouse = mouse;
-		return result;
+		return key[keycode] & 1;
 	}
 }

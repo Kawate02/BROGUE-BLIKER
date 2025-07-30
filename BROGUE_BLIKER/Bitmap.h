@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "Color.h"
 #include "const.h"
 #include "Macro.h"
@@ -8,6 +10,7 @@ namespace BROGUE_BLIKER
 	struct Dotdata
 	{
 	public:
+		Dotdata() : state(State::Null), color(), layer(0) {}
 		enum State
 		{
 			Null = -1,
@@ -20,10 +23,17 @@ namespace BROGUE_BLIKER
 	class Bitmap
 	{
 	private:
-		Dotdata bitmap[WINDOW_WIDTH * WINDOW_HEIGHT];
+		std::vector<Dotdata> bitmap;
+		int width;
+		int height;
 	public:
-		void SetDot(Color _color, int index);
+		void Init(int _width, int _height);
+		void SetDot(Color _color, int index, int _layer);
 		void ClearBitmap();
+		int Width();
+		int Height();
+		int Size();
+		std::vector<Dotdata> GetBitmap();
 		Dotdata GetDotdata(int index);
 	};
 }

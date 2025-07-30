@@ -142,23 +142,29 @@
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BROGUE_BLIKER.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Color.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\VS\BROGUE_BLIKER\BROGUE_BLIKER\プロジェクトに追加すべきファイル_VC用;E:\VS\BROGUE_BLIKER\BROGUE_BLIKER\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\VS\BROGUE_BLIKER\BROGUE_BLIKER\プロジェクトに追加すべきファイル_VC用;E:\VS\BROGUE_BLIKER\BROGUE_BLIKER\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="HyperBound.cpp" />
     <ClCompile Include="InGame.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="List.cpp" />
+    <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageGenerator.cpp" />
+    <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="TempBoost.cpp" />
     <ClCompile Include="TestStage.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextDictionary.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="ViewModel.cpp" />
   </ItemGroup>
@@ -167,29 +173,42 @@
     <ClInclude Include="Bar.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="BROGUE_BLIKER.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="const.h" />
-    <ClInclude Include="Debug.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="EffectBase.h" />
+    <ClInclude Include="Effects.h" />
     <ClInclude Include="EntryPoint.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="HyperBound.h" />
     <ClInclude Include="InGame.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="List.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectModel.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageGenerator.h" />
+    <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TempBoost.h" />
     <ClInclude Include="TestStage.h" />
+    <ClInclude Include="TextDictionary.h" />
+    <ClInclude Include="TextModel.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="UIBase.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="ViewModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

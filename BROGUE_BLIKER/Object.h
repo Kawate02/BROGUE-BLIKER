@@ -5,6 +5,13 @@
 
 namespace BROGUE_BLIKER
 {
+	enum ObjectType
+	{
+		BALL = 0,
+		BAR,
+		BLOCK,
+		UI
+	};
 	class Object
 	{
 	protected:
@@ -15,7 +22,7 @@ namespace BROGUE_BLIKER
 		Object() : position(0, 0) {}
 		Object(int x, int y, int w, int h) : position(x, y), size(w, h), collision() {}
 		virtual void Draw() {}
-		virtual void Update() {}
+		virtual void Update(int crrentTime) {}
 		virtual void Remove() {}
 		virtual void Move() {}
 		Point2D GetPosition() { return position; }

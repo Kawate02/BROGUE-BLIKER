@@ -23,7 +23,11 @@ namespace BROGUE_BLIKER
 	{
 	protected:
 		StageStruct stage;
+		int crrentTime = 0;
+		void BallBound();
 	public:
+		bool stageEndFlag = false;
+		bool stageExitFlag = false;
 		enum StageId
 		{
 			TEST = -1,

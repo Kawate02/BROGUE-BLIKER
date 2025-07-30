@@ -1,50 +1,94 @@
 #include "View.h"
-
 #include "Debug.h"
 
 namespace BROGUE_BLIKER
 {
-	Bitmap bitmap;
+	View::View() : list() {}
+	void* pPixels = nullptr;
 
-	View::View() : list()
+	void View::Init(HWND hwnd, int _width, int _height)
 	{
-		SetDrawScreen(DX_SCREEN_BACK);
+		width = _width;
+		height = _height;
+		bitmap.Init(_width, _height);
+
+		BITMAPINFO bmi = {};
+		bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+		bmi.bmiHeader.biWidth = width;
+		bmi.bmiHeader.biHeight = -height;
+		bmi.bmiHeader.biPlanes = 1;
+		bmi.bmiHeader.biBitCount = 32;
+		bmi.bmiHeader.biCompression = BI_RGB;
+
+		HDC tempHDC = GetDC(hwnd);
+		backHDC = CreateCompatibleDC(tempHDC);
+		backBitmap = CreateDIBSection(tempHDC, &bmi, DIB_RGB_COLORS, &pPixels, NULL, 0);
+		SelectObject(backHDC, backBitmap);
+		ReleaseDC(hwnd, tempHDC);
 	}
 
-	void View::Update()
+	/// <summary>
+	/// âÊñ Ç…ì]ëó
+	/// </summary>
+	void View::Present(HWND hwnd)
 	{
-		ClearDrawScreen();
+		HDC hdc = GetDC(hwnd);
+		BitBlt(hdc, 0, 0, width, height, backHDC, 0, 0, SRCCOPY);
+		ReleaseDC(hwnd, hdc);
+	}
+
+	void View::Update(HWND hwnd)
+	{
+		if (!pPixels) return;
+
+		DWORD* pixels = (DWORD*)pPixels;
+
 		bitmap.ClearBitmap();
 
 		list = ViewModelList::GetList();
 
 		for (auto i = 0; i < list.size(); i++)
 		{
-			DrawModel(list[i]->position.x, list[i]->position.y, list[i]->shape.GetShape(), list[i]->color);
+			DrawModel(list[i]->position.x, list[i]->position.y, list[i]->bitmap, list[i]->color, list[i]->layer);
 		}
 		
-		for (int i = 0; i < WINDOW_WIDTH * WINDOW_HEIGHT; i++)
+		for (int i = 0; i < width * height; i++)
 		{
-			if (bitmap.GetDotdata(i).state == Dotdata::Null)
+			Dotdata tmp = bitmap.GetDotdata(i);
+			if (tmp.state == Dotdata::Null)
 			{
 				continue;
 			}
-			Color tmp_color = bitmap.GetDotdata(i).color;
-			DrawPixel(i % WINDOW_WIDTH, i / WINDOW_WIDTH, GetColor(tmp_color.r, tmp_color.g, tmp_color.b));
+			DWORD color = tmp.color.GetColor();
+			pixels[i] = color;
 		}
-		Write();
-		ScreenFlip();
+		Present(hwnd);
 	}
 
-	void View::DrawModel(int _x, int _y, std::vector<Point2D> _shape, Color _color)
+	/// <summary>
+	/// ÉäÉ\Å[ÉXâï˙
+	/// </summary>
+	void View::Exit(HWND hwnd)
 	{
-		for (int i = 0; i < _shape.size(); i++)
+		DeleteObject(backBitmap);
+		DeleteDC(backHDC);
+	}
+
+	/// <summary>
+	/// pixelåQÇbitmapÇ…ìoò^
+	/// </summary>
+	/// <param name="_x, _y">viewmodelÇÃç¿ïW</param>
+	/// <param name="_shape">ëäëŒç¿ïWÇÃpixelÉfÅ[É^åQ</param>
+	/// <param name="_color">bitmapìoò^éûÇÃêF</param>
+	void View::DrawModel(int _x, int _y, Bitmap _bitmap, Color _color, int _layer)
+	{
+		for (int i = 0; i < _bitmap.Size() ; i++)
 		{
-			if (_shape[i].x + _x < displayOffset.x || _shape[i].x + _x >= WINDOW_WIDTH + displayOffset.x || _shape[i].y + _y < displayOffset.y || _shape[i].y + _y >= WINDOW_HEIGHT + displayOffset.y)
+			if (_bitmap.GetDotdata(i).state == Dotdata::Null || i % _bitmap.Width() + _x < displayOffset.x || i % _bitmap.Width() + _x >= width + displayOffset.x || i / _bitmap.Width() + _y < displayOffset.y || i / _bitmap.Width() + _y >= height + displayOffset.y)
 			{
 				continue;
 			}
-			bitmap.SetDot(_color, WINDOW_WIDTH * (_shape[i].y + _y - displayOffset.y) + (_shape[i].x + _x - displayOffset.x));
+			bitmap.SetDot(_color, width * (i / _bitmap.Width() + _y - displayOffset.y) + (i % _bitmap.Width() + _x - displayOffset.x), _layer);
 		}
 	}
 }

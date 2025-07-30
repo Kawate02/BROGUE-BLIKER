@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 
 namespace BROGUE_BLIKER
 {
@@ -18,6 +19,8 @@ namespace BROGUE_BLIKER
 		int g;
 		int b;
 		float a;
+
+		uint32_t GetColor();
 
 		Color operator+(const Color& other)
 		{

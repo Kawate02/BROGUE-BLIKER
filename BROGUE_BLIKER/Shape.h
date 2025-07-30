@@ -1,21 +1,21 @@
 #pragma once
 #include "Point2D.h"
 #include "Macro.h"
+#include "Bitmap.h"
 
 #include <vector>
 
 
 namespace BROGUE_BLIKER
 {
-	class Shape
+	/// <summary>
+	/// 形状を定義する基底クラス
+	/// </summary>
+	class Shape : public Bitmap
 	{
-	private:
-		std::vector<Point2D> pixels;
-
 	public:
 		Shape();
-		Shape(std::vector<Point2D> pixels);
-		std::vector<Point2D> GetShape();
+		Shape(Bitmap pixels);
 
 		/*Shape operator+(const Shape& other)
 		{
@@ -25,26 +25,35 @@ namespace BROGUE_BLIKER
 		}*/
 	};
 
+	/// <summary>
+	/// 直線
+	/// </summary>
 	class Line : public Shape
 	{
 	private:
-		std::vector<Point2D> LineGenerator(Point2D begin, Point2D end, int lineWidth);
+		Bitmap LineGenerator(Point2D begin, Point2D end, int lineWidth);
 	public:
 		Line(Point2D begin, Point2D end, int lineWidth);
 	};
 
-	class Squea : public Shape
+	/// <summary>
+	/// 直方体
+	/// </summary>
+	class Square : public Shape
 	{
 	private:
-		std::vector<Point2D> SqueaGenerator(Point2D begin, Point2D end);
+		Bitmap SqueaGenerator(Point2D begin, Point2D end);
 	public:
-		Squea(Point2D end);
+		Square(Point2D end);
 	};
 
+	/// <summary>
+	/// 円形
+	/// </summary>
 	class Circle : public Shape
 	{
 	private:
-		std::vector<Point2D> CircleGenerator(int radius, bool fill);
+		Bitmap CircleGenerator(int radius, bool fill);
 	public:
 		Circle(int radius, bool fill);
 	};

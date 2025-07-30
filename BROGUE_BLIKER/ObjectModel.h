@@ -44,9 +44,9 @@ namespace BROGUE_BLIKER
 	public:
 		BlockModel(int _x, int _y, int _w, int _h, Color _color) : size(Point2D(_w, _h))
 		{
-			models.push_back(ViewModel(0 - size.x / 2, 0 - size.y / 2, Squea(size), 1, Color(gray)));
-			models.push_back(ViewModel(0 - size.x / 2 + 1, 0 - size.y / 2 + 1, Squea(Point2D(size)), 1, Color(gray)));
-			models.push_back(ViewModel(0 - size.x / 2 + 1, 0 - size.y / 2 + 1, Squea(Point2D(size.x - 2, size.y - 2)), 0, Color(white)));
+			models.push_back(ViewModel(0 - size.x / 2, 0 - size.y / 2, Square(size), 1, Color(gray)));
+			models.push_back(ViewModel(0 - size.x / 2 + 1, 0 - size.y / 2 + 1, Square(size), 1, Color(gray)));
+			models.push_back(ViewModel(0 - size.x / 2 + 1, 0 - size.y / 2 + 1, Square(Point2D(size.x - 2, size.y - 2)), 2, Color(white)));
 			for (auto& model : models)
 			{
 				model.position = model.default_position + Point2D(_x, _y);
@@ -62,7 +62,7 @@ namespace BROGUE_BLIKER
 	public:
 		BallModel(int _x, int _y, Color _color) 
 		{
-			models.push_back(ViewModel(0, 0, Circle(5, true), 0, Color(white)));
+			models.push_back(ViewModel(-5, -5, Circle(5, true), 1, Color(white)));
 			models[0].position = models[0].position + Point2D(_x, _y);
 			models[0].color = _color;
 		}
@@ -79,7 +79,7 @@ namespace BROGUE_BLIKER
 			{
 				std::swap(size.x, size.y);
 			}
-			models.push_back(ViewModel(0 - size.x / 2, 0 - size.y / 2, Squea(size), 0, Color(white)));
+			models.push_back(ViewModel(0 - size.x / 2, 0 - size.y / 2, Square(size), 1, Color(white)));
 			models[0].position = models[0].position + Point2D(_x, _y);
 			models[0].color = _color;
 		}

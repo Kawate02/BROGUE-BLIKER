@@ -24,6 +24,10 @@ namespace BROGUE_BLIKER
 		if (a > 1.0) a = 1.0;
 		if (a < 0) a = 0;
 	}
+	uint32_t Color::GetColor()
+	{
+		return (uint32_t)(a * 255) << 24 | (uint32_t)(b << 16) | (uint32_t)(g << 8) | (uint32_t)r;
+	}
 	Color AlphaBlend(Color front, Color back)
 	{
 		float fr = front.r, fg = front.g, fb = front.b, br = back.r, bg = back.g, bb = back.b;

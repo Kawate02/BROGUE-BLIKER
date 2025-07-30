@@ -6,7 +6,7 @@ namespace BROGUE_BLIKER
 	{
 		SetCollision(position.x - model.getSize().x / 2, position.y - model.getSize().y / 2, model.getSize().x, model.getSize().y);
 	}
-	void Bar::Update()
+	void Bar::Update(int crrentTime)
 	{
 		if (down)
 		{
@@ -21,6 +21,10 @@ namespace BROGUE_BLIKER
 			else position.y = Input::mouse_pos[1];
 		}
 		SetCollision(position.x - model.getSize().x / 2, position.y - model.getSize().y / 2, model.getSize().x, model.getSize().y);
+		for (auto& effect : effects)
+		{
+			effect->OnUpdate(crrentTime, this);
+		}
 		model.Move(position);
 		model.Update();
 	}
@@ -35,6 +39,13 @@ namespace BROGUE_BLIKER
 	void Bar::Rotate(bool right)
 	{
 
+	}
+	void Bar::HitOnBall(Ball* ball)
+	{
+		for (auto& effect : effects)
+		{
+			effect->OnHitBallToBar(ball, this);
+		}
 	}
 	Vector Bar::GetReflectVector(Vector vec, Object *obj)
 	{
@@ -51,5 +62,11 @@ namespace BROGUE_BLIKER
 			angle = (obj->GetPosition().y - position.y) / ((float)BAR_WIDTH / 2);
 			return Vector(cos(angle) * vec.x / abs(vec.x) * -1, sin(angle));
 		}
+	}
+
+	void Bar::AddEffect(EffectForBar* _effect)
+	{
+		effects.push_back(_effect);
+		_effect->OnAddEffect(this);
 	}
 }

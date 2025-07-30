@@ -1,5 +1,6 @@
 #pragma once
 #include "Title.h"
+#include "StageSelect.h"
 #include "InGame.h"
 
 namespace BROGUE_BLIKER
@@ -16,13 +17,15 @@ namespace BROGUE_BLIKER
 	private:
 		Display* crrentState;
 		TitleDisplay title;
+		StageSelect select;
 		InGameDisplay ingame;
 
-		Stage::StageId selectedStage = Stage::TEST;
+		Stage::StageId selectedStage;
 
 	public:
-		GameManager();
+		void Init();
 		void Update();
 		void ChangeState(DisplayState state);
+		bool GameEndFlag();
 	};
 }
