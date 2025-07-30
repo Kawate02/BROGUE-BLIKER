@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "DxLib.h"
 #include "Input.h"
 
 #include "StageGenerator.h"
