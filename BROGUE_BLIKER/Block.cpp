@@ -4,10 +4,10 @@
 
 namespace BROGUE_BLIKER
 {
-	Block::Block() : model(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT, Color(white)), Object(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT)
+	Block::Block() : model(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT, Color(white)), Object(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT, 2)
 	{
 	}
-	Block::Block(int _x, int _y, Color _color) : model(_x, _y, BLOCK_WIDTH, BLOCK_HEIGHT, _color), Object(_x, _y, BLOCK_WIDTH, BLOCK_HEIGHT)
+	Block::Block(int _x, int _y, Color _color) : model(_x, _y, BLOCK_WIDTH, BLOCK_HEIGHT, _color), Object(_x, _y, BLOCK_WIDTH, BLOCK_HEIGHT, 2)
 	{
 		
 	}

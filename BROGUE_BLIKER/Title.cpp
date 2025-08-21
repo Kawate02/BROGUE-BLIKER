@@ -2,23 +2,26 @@
 
 namespace BROGUE_BLIKER
 {
-
 	void TitleDisplay::Init()
 	{
-		ViewModelList::Add(&background);
-		title.Draw();
+		frame.AddElement(Button(Point2D(0, 0), Point2D(WINDOW_WIDTH, WINDOW_HEIGHT), { ViewModel(0, 0, Square(Point2D(WINDOW_WIDTH, WINDOW_HEIGHT)), 0, Color(100, 100, 100)) }, {}, [this]() { this->nextState = SELECT_STAGE; }));
+		frame.Draw();
 	}
 	void TitleDisplay::Update()
 	{
 		LOG_VECTOR_SIZE();
+		frame.Update(0);
 		if (Input::KeyDown(ESCAPE))
 		{
 			endFlag = true;
 		}
+		if (Input::KeyDown(SPACE))
+		{
+			nextState = SELECT_STAGE;
+		}
 	}
 	void TitleDisplay::Remove()
 	{
-		ViewModelList::Remove(&background);
-		title.Remove();
+		frame.Remove();
 	}
 }

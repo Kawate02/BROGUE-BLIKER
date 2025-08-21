@@ -23,7 +23,6 @@ namespace BROGUE_BLIKER
 		void Draw() override;
 		void Update(int crrentTime) override;
 		void Remove() override;
-		void Move();
 		void SetVelocity(float, float);
 		Vector GetVelocity();
 		void SetSpeed(float);

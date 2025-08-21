@@ -133,6 +133,7 @@ namespace BROGUE_BLIKER
 	}
 	void Text::Remove()
 	{
+		if (vm.id != -1) return;
 		ViewModelList::Remove(&vm);
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace BROGUE_BLIKER
 {
-	Ball::Ball() : move_speed(BALL_MOVE_SPEED), model(0, 0, Color(white)), Object(0, 0, BALL_RADIUS * 2, BALL_RADIUS * 2) {}
-	Ball::Ball(int _x, int _y, Color _color) : move_speed(BALL_MOVE_SPEED), model(_x, _y, _color), Object(_x, _y, BALL_RADIUS * 2, BALL_RADIUS * 2) {}
+	Ball::Ball() : move_speed(BALL_MOVE_SPEED), model(0, 0, Color(white)), Object(0, 0, BALL_RADIUS * 2, BALL_RADIUS * 2, 0) {}
+	Ball::Ball(int _x, int _y, Color _color) : move_speed(BALL_MOVE_SPEED), model(_x, _y, _color), Object(_x, _y, BALL_RADIUS * 2, BALL_RADIUS * 2, 0) {}
 	void Ball::Draw()
 	{
 		model.Draw();
@@ -14,7 +14,7 @@ namespace BROGUE_BLIKER
 		{
 			SetVelocity(0, -1);
 		}
-		Move();
+		Move(Point2D(velocity.x * move_speed, velocity.y * move_speed));
 		SetCollision(position.x - BALL_RADIUS, position.y - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
 		if (position.x < 0 || position.y < 0 || position.x > WINDOW_WIDTH || position.y > WINDOW_HEIGHT)
 		{
@@ -31,11 +31,6 @@ namespace BROGUE_BLIKER
 	void Ball::Remove()
 	{
 		model.Remove();
-	}
-
-	void Ball::Move()
-	{
-		position = Point2D(position.x + velocity.x * move_speed, position.y + velocity.y * move_speed);
 	}
 
 	void Ball::SetVelocity(float _x, float _y)
@@ -62,7 +57,7 @@ namespace BROGUE_BLIKER
 	void Ball::BoundOnBlock(Block *obj, std::vector<Point2D> hitPosList)
 	{
 		velocity = obj->GetReflectVector(velocity, hitPosList);
-		Move();
+		Move(Point2D(position.x + velocity.x * move_speed, position.y + velocity.y * move_speed));
 		SetCollision(position.x - BALL_RADIUS, position.y - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
 	}
 
@@ -70,7 +65,7 @@ namespace BROGUE_BLIKER
 	{
 		move_speed += 0.1;
 		velocity = obj->GetReflectVector(velocity, this);
-		Move();
+		Move(Point2D(position.x + velocity.x * move_speed, position.y + velocity.y * move_speed));
 		SetCollision(position.x - BALL_RADIUS, position.y - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
 	}
 	void Ball::AddEffect(EffectForBall* _effect)

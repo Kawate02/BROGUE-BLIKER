@@ -13,6 +13,7 @@ namespace BROGUE_BLIKER
 		{
 			SetStage(Stage::StageId::TEST);
 			stageGenerateFlag = true;
+			nextState = INGAME;
 		}
 	}
 

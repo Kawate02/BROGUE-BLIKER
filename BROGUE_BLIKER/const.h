@@ -10,6 +10,7 @@ namespace BROGUE_BLIKER
 
 #define UNIT unsigned int
 
+
 	enum BlendMode
 	{
 		DEFAULT = 0,
