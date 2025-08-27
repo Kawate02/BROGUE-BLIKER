@@ -57,7 +57,7 @@ namespace BROGUE_BLIKER
 	void Ball::BoundOnBlock(Block *obj, std::vector<Point2D> hitPosList)
 	{
 		velocity = obj->GetReflectVector(velocity, hitPosList);
-		Move(Point2D(position.x + velocity.x * move_speed, position.y + velocity.y * move_speed));
+		Move(Point2D(velocity.x * move_speed, velocity.y * move_speed));
 		SetCollision(position.x - BALL_RADIUS, position.y - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
 	}
 
@@ -65,7 +65,7 @@ namespace BROGUE_BLIKER
 	{
 		move_speed += 0.1;
 		velocity = obj->GetReflectVector(velocity, this);
-		Move(Point2D(position.x + velocity.x * move_speed, position.y + velocity.y * move_speed));
+		Move(Point2D(velocity.x * move_speed, velocity.y * move_speed));
 		SetCollision(position.x - BALL_RADIUS, position.y - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
 	}
 	void Ball::AddEffect(EffectForBall* _effect)

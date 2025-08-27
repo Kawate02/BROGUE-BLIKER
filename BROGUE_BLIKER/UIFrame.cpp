@@ -50,13 +50,6 @@ namespace BROGUE_BLIKER
 		}
 	}
 
-	void UIFrame::AddElement(UserInterface element)
-	{
-		auto ptr = MakeSharedFromInstance(element);
-		this->elements.emplace_back(ptr);
-		elements[elements.size() - 1]->Draw();
-	}
-
 	void UIFrame::Move(Point2D pos)
 	{
 		for (auto& element : elements)

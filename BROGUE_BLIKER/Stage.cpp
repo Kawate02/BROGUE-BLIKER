@@ -26,7 +26,7 @@ namespace BROGUE_BLIKER
 				{
 					stage.ball[i].BoundOnBlock(&stage.block[j], hitPosList);
 					stage.block[j].Break();
-					stage.block.erase(stage.block.begin() + j);
+					stage.block.erase(stage.block.begin() + j);//‚±‚ê—Ç‚­‚È‚¢‚æ‚Ë
 					hitPosList.clear();
 					break;
 				}

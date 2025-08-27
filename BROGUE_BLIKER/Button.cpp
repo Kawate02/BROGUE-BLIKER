@@ -30,6 +30,7 @@ namespace BROGUE_BLIKER
 	}
 	void Button::Update(int crrentTime)
 	{
+		std::cout << state << std::endl;
 		if (Input::mouse_pos[0] >= cursorHoverAreaBegin.x && Input::mouse_pos[0] <= cursorHoverAreaEnd.x &&
 			Input::mouse_pos[1] >= cursorHoverAreaBegin.y && Input::mouse_pos[1] <= cursorHoverAreaEnd.y)
 		{

@@ -20,7 +20,6 @@ namespace BROGUE_BLIKER
 	{
 		Stage::GenerateStage();
 		stage.bar[1].AddEffect(&hyperBound);
-		title.Draw();
 	}
 	void TestStage::Update()
 	{
@@ -44,6 +43,5 @@ namespace BROGUE_BLIKER
 	void TestStage::DestroyStage()
 	{
 		Stage::DestroyStage();
-		title.Remove();
 	}
 }

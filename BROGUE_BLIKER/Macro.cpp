@@ -27,9 +27,4 @@ namespace BROGUE_BLIKER
         const char* multiByteStr = buffer;
         return multiByteStr;
 	}
-	template <typename T>
-	std::shared_ptr<T> MakeSharedFromInstance(T&& obj) //Todo 
-	{
-		return std::make_shared<std::decay_t<T>>(std::forward<T>(obj));
-	}
 }
