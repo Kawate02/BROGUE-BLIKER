@@ -8,14 +8,14 @@
 namespace BROGUE_BLIKER
 {
 #define BALL_RADIUS 5
-#define BALL_MOVE_SPEED 5
+#define BALL_MOVE_SPEED 10
 	class Ball : public Object
 	{
 	private:
 		BallModel model;
 		int size = BALL_RADIUS;
 		float move_speed;
-		Vector velocity;
+		Vector velocity = Vector(0, -1);
 		std::vector<EffectForBall*> effects;
 	public:
 		Ball();

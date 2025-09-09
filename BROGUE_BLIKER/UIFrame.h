@@ -19,11 +19,15 @@ namespace BROGUE_BLIKER
 		void Draw();
 		void Update(int currentTime);
 		void Remove();
+		void Clear();
 		template <typename T, typename... Args>
 		void AddElement(Args ...args) 
 		{
 			this->elements.emplace_back(std::make_shared<T>(args...)); 
+			this->elements.back()->id = elements.size() - 1;
 		}
+		void AddElements(std::vector<std::shared_ptr<UserInterface>> elements);
 		void Move(Point2D pos);
+		int GetSize() { return elements.size(); }
 	};
 }

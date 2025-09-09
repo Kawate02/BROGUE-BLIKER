@@ -63,6 +63,7 @@ namespace BROGUE_BLIKER
 
 	void Ball::BoundOnBar(Bar *obj, std::vector<Point2D> hitPosList)
 	{
+		if (velocity.x == 0 && velocity.y == 0) return;
 		move_speed += 0.1;
 		velocity = obj->GetReflectVector(velocity, this);
 		Move(Point2D(velocity.x * move_speed, velocity.y * move_speed));

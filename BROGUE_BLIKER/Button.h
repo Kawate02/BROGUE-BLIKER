@@ -17,7 +17,7 @@ namespace BROGUE_BLIKER
 		virtual void OffMouse();
 		virtual void Click();
 	public:
-		Button(Point2D position, Point2D size, std::vector<ViewModel>, std::vector<Text> text,  std::function<void()> clickEvent);
+		Button(Point2D position, Point2D size, std::vector<ViewModel>, std::vector<Text> text, std::function<void()> clickEvent, int layer, bool isMove = false);
 		void Update(int crrentTime) override;
 		void Enable();
 		void Disable();

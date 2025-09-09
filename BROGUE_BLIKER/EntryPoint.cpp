@@ -20,4 +20,8 @@ namespace BROGUE_BLIKER
 	{
 		view.Exit(hwnd);
 	}
+	bool gameEnd()
+	{
+		return game.GameEndFlag();
+	}
 }

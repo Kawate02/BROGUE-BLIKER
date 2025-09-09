@@ -20,5 +20,6 @@ namespace BROGUE_BLIKER
 		void Remove() override;
 		bool moveable;
 		bool deleteMyself = false;
+		int id = -1;
 	};
 }

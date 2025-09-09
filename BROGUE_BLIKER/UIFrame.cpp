@@ -50,6 +50,23 @@ namespace BROGUE_BLIKER
 		}
 	}
 
+	void UIFrame::Clear()
+	{
+		for (auto& element : elements)
+		{
+			element->Remove();
+		}
+		elements.clear();
+	}
+
+	void UIFrame::AddElements(std::vector<std::shared_ptr<UserInterface>> elements)
+	{
+		for (auto& element : elements)
+		{
+			this->elements.emplace_back(element);
+		}
+	}
+
 	void UIFrame::Move(Point2D pos)
 	{
 		for (auto& element : elements)

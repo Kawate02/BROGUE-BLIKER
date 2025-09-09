@@ -26,7 +26,7 @@ namespace BROGUE_BLIKER
 				{
 					stage.ball[i].BoundOnBlock(&stage.block[j], hitPosList);
 					stage.block[j].Break();
-					stage.block.erase(stage.block.begin() + j);//‚±‚ê—Ç‚­‚È‚¢‚æ‚Ë
+					stage.block.erase(stage.block.begin() + j);
 					hitPosList.clear();
 					break;
 				}
@@ -49,10 +49,18 @@ namespace BROGUE_BLIKER
 		{
 			ball.Draw();
 		}
+		gameClearFlag = false;
+		gameOverFlag = false;
+		stageExitFlag = false;
 	}
 
 	void Stage::Update()
 	{
+		if (stage.ballStock < 0)
+		{
+			gameOverFlag = true;
+		}
+		
 		for (auto& block : stage.block)
 		{
 			block.Update(crrentTime);
@@ -65,6 +73,25 @@ namespace BROGUE_BLIKER
 		{
 			ball.Update(crrentTime);
 		}
+		for (auto i = 0; i < stage.ball.size(); i++)
+		{
+			if (stage.ball[i].deleteFlag)
+			{
+				stage.ball[i].Remove();
+				stage.ball.erase(stage.ball.begin() + i);
+			}
+		}
+		if (stage.ball.size() == 0)
+		{
+			stage.ballStock--;
+			if (stage.ballStock < 0)
+			{
+				gameOverFlag = true;
+			}
+			stage.ball.push_back(Ball(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 55, Color(white)));
+			stage.ball[0].Draw();
+		}
+		BallBound();
 		crrentTime++;
 	}
 	void Stage::DestroyStage()
@@ -82,5 +109,9 @@ namespace BROGUE_BLIKER
 		{
 			ball.Remove();
 		}
+	}
+	void Stage::LoadStage(StageStruct stage)
+	{
+		this->stage = stage;
 	}
 }

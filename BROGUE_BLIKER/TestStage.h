@@ -8,6 +8,8 @@ namespace BROGUE_BLIKER
 {
 	class TestStage : public Stage
 	{
+	private:
+		StageStruct stageStruct;
 	public:
 		TestStage();
 		void GenerateStage() override;

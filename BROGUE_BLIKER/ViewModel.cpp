@@ -4,7 +4,12 @@ namespace BROGUE_BLIKER
 {
 	ViewModel::ViewModel() : position(), bitmap(), id(-1), direction(0), layer(0), color() {}
 
-	ViewModel::ViewModel(int _x, int _y, Bitmap bitmap, int _layer, Color _color) : default_position(Point2D(_x, _y)), position(Point2D(_x, _y)), bitmap(bitmap), id(-1), direction(0), layer(_layer), color(_color) {}
+	ViewModel::ViewModel(int _x, int _y, Bitmap bitmap, int _layer, Color _color) : default_position(Point2D(_x, _y)), position(Point2D(_x, _y)), bitmap(bitmap), id(-1), direction(0), layer(_layer), color(_color) 
+	{
+		int x = _x - bitmap.Width() / 2, 
+			y = _y - bitmap.Height() / 2;
+		position = Point2D(x, y);
+	}
 
 	std::vector<ViewModel*> ViewModelList::list;
 	/// <summary>
@@ -13,6 +18,7 @@ namespace BROGUE_BLIKER
 	/// <param name="vm">描画するModelポインタ</param>
 	void ViewModelList::Add(ViewModel* vm)
 	{
+		if (vm->id != -1) return;
 		list.push_back(vm);
 		vm->id = list.size() - 1;
 	}
@@ -22,6 +28,7 @@ namespace BROGUE_BLIKER
 	/// <param name="vm">対象Modelのポインタ</param>
 	void ViewModelList::Update(ViewModel* vm)
 	{
+		if (vm->id == -1) return;
 		list[vm->id] = vm;
 	}
 	/// <summary>
@@ -30,11 +37,13 @@ namespace BROGUE_BLIKER
 	/// <param name="vm">対象Modelのポインタ</param>
 	void ViewModelList::Remove(ViewModel* vm)
 	{
+		if (vm->id == -1) return;
 		for (auto i = vm->id + 1 ; i < list.size(); i++)
 		{
 			list[i]->id--;
 		}
 		list.erase(list.begin() + vm->id);
+		vm->id = -1;
 	}
 
 	void ViewModelList::Clear()

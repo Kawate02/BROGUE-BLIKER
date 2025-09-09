@@ -38,7 +38,7 @@ namespace BROGUE_BLIKER
 
 	void GameManager::Init()
 	{
-		ChangeState(SELECT_STAGE);
+		ChangeState(TITLE);
 	}
 
 	void GameManager::Update()
