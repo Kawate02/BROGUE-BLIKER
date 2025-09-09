@@ -1,5 +1,7 @@
 #include "Input.h"
 
+#include <iostream>
+
 namespace BROGUE_BLIKER
 {
 	int Input::mouse_pos[2];
@@ -20,7 +22,7 @@ namespace BROGUE_BLIKER
 
 		for (int i = 0; i < 256; i++)
 		{
-			if (buf[i])
+			if (buf[i] & 0x80)
 			{
 				if (key[i] == 0) key[i] = 1;
 				else if (key[i] == 1) key[i] = 2;
@@ -32,14 +34,12 @@ namespace BROGUE_BLIKER
 	void Input::GetCursorPoint(HWND hwnd)
 	{
 		static POINT cursor_pos;
-		static tagRECT rect;
-		static LPRECT lpRect = &rect;
 
 		GetCursorPos(&cursor_pos);
-		GetWindowRect(hwnd, lpRect);
+		ScreenToClient(hwnd, &cursor_pos);
 
-		mouse_pos[0] = cursor_pos.x - lpRect->left;
-		mouse_pos[1] = cursor_pos.y - lpRect->top;
+		mouse_pos[0] = cursor_pos.x;
+		mouse_pos[1] = cursor_pos.y;
 	}
 
 	bool Input::KeyPress(int keycode)

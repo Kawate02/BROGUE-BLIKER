@@ -1,13 +1,17 @@
-#include "UIBase.h"
+#include "Hover.h"
 
 namespace BROGUE_BLIKER
 {
-	Hover::Hover(Point2D begin, Point2D end, Point2D size, int layer, Color color) : cursorHoverAreaBegin(begin), cursorHoverAreaEnd(end), window(0, 0, Square(size), layer, color) {}
+	Hover::Hover(Point2D begin, Point2D end, Point2D size, int layer, Color color) : cursorHoverAreaBegin(begin), cursorHoverAreaEnd(end)
+	{
+		viewModels.emplace_back(0, 0, Square(size), layer, color);
+	}
 
 	void Hover::Draw()
 	{
-		ViewModelList::Add(&window);
+		UserInterface::Draw();
 	}
+
 	void Hover::Update(int crrentTime)
 	{
 		if (Input::mouse_pos[0] >= cursorHoverAreaBegin.x && Input::mouse_pos[0] <= cursorHoverAreaEnd.x &&
@@ -19,9 +23,10 @@ namespace BROGUE_BLIKER
 		{
 			Remove();
 		}
+		UserInterface::Update(crrentTime);
 	}
 	void Hover::Remove()
 	{
-
+		UserInterface::Remove();
 	}
 }

@@ -118,7 +118,7 @@ namespace BROGUE_BLIKER
 			}
 			offsetX += textBuffer.Width() + TEXT_BETWEEN_PIXEL;
 		}
-		return ViewModel(pos.x - textResult.Width() / 2, pos.y - textResult.Height() / 2, textResult, layer, color);
+		return ViewModel(pos.x, pos.y, textResult, layer, color);
 
 	}
 	void Text::Draw()
@@ -133,6 +133,7 @@ namespace BROGUE_BLIKER
 	}
 	void Text::Remove()
 	{
+		if (vm.id == -1) return;
 		ViewModelList::Remove(&vm);
 	}
 }

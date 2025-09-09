@@ -15,12 +15,12 @@ namespace BROGUE_BLIKER
 	class Text
 	{
 	private:
-		Point2D pos;
-		int layer;
 		std::vector<TextStruct> text;
 		ViewModel vm;
 		Color color = Color(white);
 	public:
+		Point2D pos;
+		int layer;
 		Text(Point2D pos, const wchar_t* str, int _layer, const wchar_t* fontName, Color color = Color(white), int fontSize = 16);
 
 		void SetText(const std::string str);

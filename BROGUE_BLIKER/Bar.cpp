@@ -1,8 +1,8 @@
 #include "Bar.h"
-#include "Debug.h"
+
 namespace BROGUE_BLIKER
 {
-	Bar::Bar(int _x, int _y, Color _color, bool down) :down(down), model(_x, _y, BAR_WIDTH, BAR_HEIGHT, _color, down), Object(_x, _y, BAR_WIDTH, BAR_HEIGHT)
+	Bar::Bar(int _x, int _y, Color _color, bool down) :down(down), model(_x, _y, BAR_WIDTH, BAR_HEIGHT, _color, down), Object(_x, _y, BAR_WIDTH, BAR_HEIGHT, 1)
 	{
 		SetCollision(position.x - model.getSize().x / 2, position.y - model.getSize().y / 2, model.getSize().x, model.getSize().y);
 	}

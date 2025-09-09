@@ -79,6 +79,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+        if (gameEnd()) break;
 
         Update(hwnd); //ƒQ[ƒ€ƒ‹[ƒv
 

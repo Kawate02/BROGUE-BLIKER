@@ -8,7 +8,8 @@ namespace BROGUE_BLIKER
 {
 	class TestStage : public Stage
 	{
-		Text title = Text(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), L"BLIKER", 0, L"游ゴシック", Color(white), 16);
+	private:
+		StageStruct stageStruct;
 	public:
 		TestStage();
 		void GenerateStage() override;

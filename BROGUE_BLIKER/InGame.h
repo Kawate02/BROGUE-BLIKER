@@ -11,12 +11,14 @@ namespace BROGUE_BLIKER
 		READY,
 		END,
 		PAUSE,
+		GAMEOVER,
 		RESULT
 	};
 
 	class InGameDisplay : public Display
 	{
 	private:
+		GameState oldState;
 		GameState crrentState;
 		Stage* crrentStage;
 		Stage::StageId crrentId;

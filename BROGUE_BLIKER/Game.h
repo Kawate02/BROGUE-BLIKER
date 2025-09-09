@@ -5,22 +5,18 @@
 
 namespace BROGUE_BLIKER
 {
-	enum DisplayState
-	{
-		TITLE = 0x00,
-		SELECT_STAGE,
-		INGAME,
-	};
-
 	class GameManager
 	{
 	private:
 		Display* crrentState;
+		DisplayState crrentStateTag;
 		TitleDisplay title;
 		StageSelect select;
 		InGameDisplay ingame;
 
 		Stage::StageId selectedStage;
+
+		bool CanChangeState(DisplayState nextState);
 
 	public:
 		void Init();

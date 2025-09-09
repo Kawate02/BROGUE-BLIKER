@@ -9,6 +9,8 @@
 #include "Input.h"
 #include "Block.h"
 
+#include "UIFrame.h"
+
 namespace BROGUE_BLIKER
 {
 	class TitleDisplay : public Display

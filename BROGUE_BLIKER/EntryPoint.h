@@ -9,4 +9,5 @@ namespace BROGUE_BLIKER
 	void Init(HWND hwnd);
 	void Update(HWND hwnd);
 	void Exit(HWND hwnd);
+	bool gameEnd();
 }

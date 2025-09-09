@@ -19,6 +19,7 @@ namespace BROGUE_BLIKER
 		{
 			for (auto& model : models)
 			{
+				if (model.id == -1) continue;
 				ViewModelList::Remove(&model);
 			}
 		}
