@@ -9,7 +9,7 @@ namespace BROGUE_BLIKER
 
 	void Hover::Draw()
 	{
-		UserInterface::Draw();
+		UIElement::Draw();
 	}
 
 	void Hover::Update(int crrentTime)
@@ -23,10 +23,10 @@ namespace BROGUE_BLIKER
 		{
 			Remove();
 		}
-		UserInterface::Update(crrentTime);
+		UIElement::Update(crrentTime);
 	}
 	void Hover::Remove()
 	{
-		UserInterface::Remove();
+		UIElement::Remove();
 	}
 }

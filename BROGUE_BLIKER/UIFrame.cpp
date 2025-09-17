@@ -8,7 +8,7 @@ namespace BROGUE_BLIKER
 	}
 	UIFrame::UIFrame() : elements() {}
 
-	UIFrame::UIFrame(std::vector<UserInterface> elements)
+	UIFrame::UIFrame(std::vector<UIElement> elements)
 	{
 		for (auto& element : elements)
 		{
@@ -59,7 +59,7 @@ namespace BROGUE_BLIKER
 		elements.clear();
 	}
 
-	void UIFrame::AddElements(std::vector<std::shared_ptr<UserInterface>> elements)
+	void UIFrame::AddElements(std::vector<std::shared_ptr<UIElement>> elements)
 	{
 		for (auto& element : elements)
 		{

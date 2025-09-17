@@ -119,7 +119,6 @@ namespace BROGUE_BLIKER
 			offsetX += textBuffer.Width() + TEXT_BETWEEN_PIXEL;
 		}
 		return ViewModel(pos.x, pos.y, textResult, layer, color);
-
 	}
 	void Text::Draw()
 	{

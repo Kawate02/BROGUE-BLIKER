@@ -3,7 +3,7 @@
 
 namespace BROGUE_BLIKER
 {
-	class Hover : public UserInterface
+	class Hover : public UIElement
 	{
 	private:
 		Point2D cursorHoverAreaBegin;

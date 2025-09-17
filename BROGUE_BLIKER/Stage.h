@@ -39,6 +39,7 @@ namespace BROGUE_BLIKER
 		Stage() : stage("", -1, ViewModel(), std::vector<Block>(), std::vector<Bar>(), std::vector<Ball>(), 0) {}
 		Stage(std::string _name, int _id, ViewModel _background, std::vector<Block> _block, std::vector<Bar> _bar, std::vector<Ball> _ball, int _ballStock) : stage(_name, _id, ViewModel(_background), std::vector<Block>(_block), std::vector<Bar>(_bar), std::vector<Ball>(_ball), _ballStock) {}
 		virtual void GenerateStage();
+		virtual void RegenerateStage();
 		virtual void Update();
 		virtual void DestroyStage();
 		void LoadStage(StageStruct stage);

@@ -11,11 +11,11 @@ namespace BROGUE_BLIKER
 	class UIFrame
 	{
 	private:
-		std::vector<std::shared_ptr<UserInterface>> elements;
+		std::vector<std::shared_ptr<UIElement>> elements;
 		void TurnEnableJustFaceButton();
 	public:
 		UIFrame();
-		UIFrame(std::vector<UserInterface> elements);
+		UIFrame(std::vector<UIElement> elements);
 		void Draw();
 		void Update(int currentTime);
 		void Remove();
@@ -26,7 +26,7 @@ namespace BROGUE_BLIKER
 			this->elements.emplace_back(std::make_shared<T>(args...)); 
 			this->elements.back()->id = elements.size() - 1;
 		}
-		void AddElements(std::vector<std::shared_ptr<UserInterface>> elements);
+		void AddElements(std::vector<std::shared_ptr<UIElement>> elements);
 		void Move(Point2D pos);
 		int GetSize() { return elements.size(); }
 	};

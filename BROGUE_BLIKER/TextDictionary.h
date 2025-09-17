@@ -10,7 +10,7 @@ namespace BROGUE_BLIKER
 		int fontSize;
 		const wchar_t* font;
 
-		bool operator ==(const TextStruct& other) const
+		inline bool operator ==(const TextStruct& other) const
 		{
 			return key == other.key && fontSize == other.fontSize && font == other.font;
 		}

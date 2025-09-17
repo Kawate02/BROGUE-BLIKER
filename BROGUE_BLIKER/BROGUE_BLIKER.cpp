@@ -32,7 +32,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) 
 {
-    OpenConsole();
+    //OpenConsole();
     std::cout << "[Logger] Initialized" << std::endl;
     const char CLASS_NAME[] = "MyGameWindow";
 

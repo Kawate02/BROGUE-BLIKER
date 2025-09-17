@@ -4,7 +4,7 @@
 
 namespace BROGUE_BLIKER
 {
-	class Button : public UserInterface
+	class Button : public UIElement
 	{
 	protected:
 		enum State { NORMAL, HOVER, CLICK, DISABLE };
@@ -21,5 +21,6 @@ namespace BROGUE_BLIKER
 		void Update(int crrentTime) override;
 		void Enable();
 		void Disable();
+		std::shared_ptr<UIElement> Clone() override;
 	};
 }

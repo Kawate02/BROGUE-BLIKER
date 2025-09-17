@@ -4,7 +4,7 @@ namespace BROGUE_BLIKER
 {
 	void TitleDisplay::Init()
 	{
-		frame.AddElement<UserInterface>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2),
+		frame.AddElement<UIElement>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2),
 			std::vector<ViewModel>{ ViewModel(0, 0, Square(Point2D(WINDOW_WIDTH, WINDOW_HEIGHT)), 0, Color(100, 100, 100)) },
 			std::vector<Text>{ Text(Point2D(0, 0), L"ブロック崩し", 0, L"游ゴシック", Color(white), 32) }, 0, false);
 		frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 50),
