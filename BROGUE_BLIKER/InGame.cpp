@@ -50,31 +50,32 @@ namespace BROGUE_BLIKER
 					Point2D(200, 40),
 					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
 					std::vector<Text>{Text(Point2D(0, 0), L"CONTINUE", 0, L"游ゴシック", Color(black), 16)},
-					[this]() { this->crrentState = DOING; frame.Remove(); }, 1, false);
+					[this]() { this->crrentState = DOING; frame.Clear(); }, 1, false);
 				frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 100),
 					Point2D(200, 40),
 					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
 					std::vector<Text>{Text(Point2D(0, 0), L"EXIT", 0, L"游ゴシック", Color(black), 16)},
-					[this]() { this->nextState = TITLE; frame.Remove(); }, 1, false);
+					[this]() { this->nextState = TITLE; frame.Clear(); }, 1, false);
 				frame.Draw();
 			}
 			if (Input::KeyDown(ESCAPE))
 			{
 				crrentState = DOING;
+				frame.Clear();
 			}
 			oldState = PAUSE;
 			break;
 		case GAMEOVER:
 			if (oldState == DOING)
 			{
-				frame.AddElement<UserInterface>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2),
+				frame.AddElement<UIElement>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2),
 					std::vector<ViewModel>{ },
 					std::vector<Text>{ Text(Point2D(0, 0), L"GAME OVER", 0, L"游ゴシック", Color(white), 32) }, 0, false);
 				frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 50),
 					Point2D(200, 40),
 					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
 					std::vector<Text>{Text(Point2D(0, 0), L"RETRY", 0, L"游ゴシック", Color(black), 16)},
-					[this]() { this->crrentState = DOING; frame.Remove(); }, 1, false);
+					[this]() { Remove(); Init(); }, 1, false);
 				frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 100),
 					Point2D(200, 40),
 					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
@@ -85,11 +86,23 @@ namespace BROGUE_BLIKER
 			oldState = GAMEOVER;
 			break;
 		case RESULT:
-			if (Input::KeyDown(SPACE) || Input::KeyDown(MOUSE_LEFT))
+			if (oldState == DOING)
 			{
-				stageExitFlag = true;
+				frame.AddElement<UIElement>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2),
+					std::vector<ViewModel>{ },
+					std::vector<Text>{ Text(Point2D(0, 0), L"CLEAR", 0, L"游ゴシック", Color(white), 32) }, 0, false);
+				frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 50),
+					Point2D(200, 40),
+					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
+					std::vector<Text>{Text(Point2D(0, 0), L"RETRY", 0, L"游ゴシック", Color(black), 16)},
+					[this]() { Remove(); Init(); }, 1, false);
+				frame.AddElement<Button>(Point2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3 * 2 + 100),
+					Point2D(200, 40),
+					std::vector<ViewModel>{ViewModel(0, 0, Square(Point2D(200, 40)), 0, Color(200, 200, 200))},
+					std::vector<Text>{Text(Point2D(0, 0), L"EXIT", 0, L"游ゴシック", Color(black), 16)},
+					[this]() { this->nextState = TITLE; crrentStage = GenerateStage(crrentId); frame.Remove(); }, 1, false);
+				frame.Draw();
 			}
-			frame.Update(0);
 			oldState = RESULT;
 			break;
 		default:

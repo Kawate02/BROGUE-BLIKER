@@ -3,7 +3,7 @@
 namespace BROGUE_BLIKER
 {
 	Button::Button(Point2D position, Point2D size, std::vector<ViewModel> viewModels, std::vector<Text> text, std::function<void()> clickEvent, int layer, bool isMove) :
-		UserInterface(position, viewModels, text, layer, isMove)
+		UIElement(position, viewModels, text, layer, isMove)
 	{
 		this->size = size;
 		cursorHoverAreaBegin = Point2D(position.x - size.x / 2, position.y - size.y / 2);
@@ -43,7 +43,7 @@ namespace BROGUE_BLIKER
 		{
 			OffMouse();
 		}
-		UserInterface::Update(crrentTime);
+		UIElement::Update(crrentTime);
 	}
 	void Button::Enable()
 	{
@@ -52,5 +52,9 @@ namespace BROGUE_BLIKER
 	void Button::Disable()
 	{
 		state = State::DISABLE;
+	}
+	std::shared_ptr<UIElement> Button::Clone()
+	{
+		return std::make_shared<Button>(position, size, viewModels, texts, clickEvent, layer, moveable);
 	}
 }

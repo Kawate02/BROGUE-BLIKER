@@ -54,11 +54,22 @@ namespace BROGUE_BLIKER
 		stageExitFlag = false;
 	}
 
+	void Stage::RegenerateStage()
+	{
+		gameClearFlag = false;
+		gameOverFlag = false;
+		stageExitFlag = false;
+	}
+
 	void Stage::Update()
 	{
 		if (stage.ballStock < 0)
 		{
 			gameOverFlag = true;
+		}
+		if (stage.block.size() <= 0)
+		{
+			gameClearFlag = true;
 		}
 		
 		for (auto& block : stage.block)

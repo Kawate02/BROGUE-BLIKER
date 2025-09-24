@@ -84,10 +84,10 @@ namespace BROGUE_BLIKER
 	{
 		for (int i = 0; i < _bitmap.Size() ; i++)
 		{
-			if (_bitmap.GetDotdata(i).state == Dotdata::Null || i % _bitmap.Width() + _x < displayOffset.x || i % _bitmap.Width() + _x >= width + displayOffset.x || i / _bitmap.Width() + _y < displayOffset.y || i / _bitmap.Width() + _y >= height + displayOffset.y)
-			{
-				continue;
-			}
+			if (_bitmap.GetDotdata(i).state == Dotdata::Null ||
+				i % _bitmap.Width() + _x < displayOffset.x || i % _bitmap.Width() + _x >= width + displayOffset.x ||
+				i / _bitmap.Width() + _y < displayOffset.y || i / _bitmap.Width() + _y >= height + displayOffset.y) continue;
+
 			bitmap.SetDot(_color, width * (i / _bitmap.Width() + _y - displayOffset.y) + (i % _bitmap.Width() + _x - displayOffset.x), _layer);
 		}
 	}

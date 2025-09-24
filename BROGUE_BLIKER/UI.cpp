@@ -2,8 +2,8 @@
 
 namespace BROGUE_BLIKER
 {
-	UserInterface::UserInterface() : Object(0, 0, 0, 0, 64), viewModels(), texts(), moveable(false) {}
-	UserInterface::UserInterface(Point2D pos, std::vector<ViewModel> viewModels, std::vector<Text> texts, int layer, bool isMove) :
+	UIElement::UIElement() : Object(0, 0, 0, 0, 64), viewModels(), texts(), moveable(false) {}
+	UIElement::UIElement(Point2D pos, std::vector<ViewModel> viewModels, std::vector<Text> texts, int layer, bool isMove) :
 		Object(pos.x, pos.y, 0, 0, layer + 64), moveable(isMove) 
 	{
 		for (auto i=0; i< viewModels.size(); i++)
@@ -21,7 +21,7 @@ namespace BROGUE_BLIKER
 		}
 		this->texts = texts;
 	}
-	void UserInterface::Draw()
+	void UIElement::Draw()
 	{
 		for (auto& model : viewModels)
 		{
@@ -32,7 +32,7 @@ namespace BROGUE_BLIKER
 			text.Draw();
 		}
 	}
-	void UserInterface::Update(int crrentTime)
+	void UIElement::Update(int crrentTime)
 	{
 		for (auto& model : viewModels)
 		{
@@ -43,7 +43,7 @@ namespace BROGUE_BLIKER
 			text.Update(crrentTime);
 		}
 	}
-	void UserInterface::Remove()
+	void UIElement::Remove()
 	{
 		for (auto& model : viewModels)
 		{
@@ -54,5 +54,9 @@ namespace BROGUE_BLIKER
 			text.Remove();
 		}
 		deleteMyself = true;
+	}
+	std::shared_ptr<UIElement> UIElement::Clone()
+	{
+		return std::make_shared<UIElement>(position, viewModels, texts, layer, moveable);
 	}
 }

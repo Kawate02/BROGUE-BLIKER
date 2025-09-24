@@ -8,7 +8,7 @@
 namespace BROGUE_BLIKER
 {
 #define BALL_RADIUS 5
-#define BALL_MOVE_SPEED 10
+#define BALL_MOVE_SPEED 5
 	class Ball : public Object
 	{
 	private:
